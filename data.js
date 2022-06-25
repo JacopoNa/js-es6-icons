@@ -125,6 +125,9 @@ const iconContainer = document.querySelector('.js-all-card');
 // FUNCTION PER POPOLARE IL DOM
 printCards(allIcons, iconContainer);
 
+// popolare le options della select della milestone 3 dinamicamente.
+const newIconArray = arrayOptions(allIcons);
+printNewArray(newIconArray);
 
 // ----------------------
 //     EVENT CHANGE
@@ -194,8 +197,30 @@ function generateColor() {
 	return color;
 };
 
-
 // Generatore numero random
 function getRndInteger(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) ) + min;
 };
+
+// inserisco in un array vuoto le options senza avere  duplicati
+function arrayOptions(iconsArray) {
+	const newArray = [];
+	iconsArray.forEach((iconObject) => {
+		if(!newArray.includes(iconObject.type)) {
+			newArray.push(iconObject.type);
+		}
+	});
+
+	return newArray;
+}
+
+// stampo le options
+function printNewArray(typeOptions) {
+	const newSelect = document.getElementById('category');
+	typeOptions.forEach((element) => {
+		const newOption = `<option value="${element}">${element}</option>`
+		newSelect.innerHTML += newOption;
+	})
+
+}
+
